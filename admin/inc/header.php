@@ -10,6 +10,7 @@
   <title>Admin</title>
 
   <!-- Favicons -->
+  <link href="img/favicon.png" rel="icon">
   <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
 
   <!-- Bootstrap core CSS -->
@@ -29,6 +30,11 @@
     Author: TemplateMag.com
     License: https://templatemag.com/license/
   ======================================================= -->
+  <?php session_start();
+  if ($_SESSION['status'] != "login") {
+    header("location:sign_in.php");
+  }
+  ?>
   <section id="container">
     <!-- **********************************************************************************************************************************************************
         TOP BAR CONTENT & NOTIFICATIONS
@@ -41,7 +47,7 @@
       <!--logo start-->
       <a href="index.html" class="logo"><b>ADMINIS<span>TRATOR</span></b></a>
       <!--logo end-->
-     
+
       <div class="top-menu">
         <ul class="nav pull-right top-menu">
           <li><a class="logout" href="login.html">Logout</a></li>

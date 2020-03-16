@@ -2,9 +2,7 @@
 <?php include 'inc/sidebar.php' ?>
     
     <section id="main-content">
-      <section class="wrapper site-min-height">
-        <h3>Dropzone File Upload</h3>
-        
+      <section class="wrapper site-min-height">        
       </section>
     </section>
     
