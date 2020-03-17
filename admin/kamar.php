@@ -1,4 +1,4 @@
-<?php $page='kamar' ?>
+<?php $page='Kamar' ?>
 <?php include 'inc/header.php' ?>
 <?php include 'inc/sidebar.php' ?>
 <?php include 'inc/koneksi.php' ?>
@@ -140,8 +140,8 @@
             }
         } elseif (isset($_GET['act']) and $_GET['act'] == 'proses_tambah') {
             $insert = mysqli_query($conn, "INSERT INTO kamar (nama_kamar, tipe_kamar, deskripsi,
-            harga, stok) VALUEs ('$_POST[nama_kamar]', '$_POST[tipe_kamar]', '$_POST[deskripsi]',
-            '$_POST[harga]', '$_POST[stok]')");
+            harga, gambar, stok) VALUEs ('$_POST[nama_kamar]', '$_POST[tipe_kamar]', '$_POST[deskripsi]',
+            '$_POST[harga]', 'default.jpg', '$_POST[stok]')") or die(mysqli_error($conn));
             if ($insert) {
                 echo "<script>
                     window.location.href='kamar.php';

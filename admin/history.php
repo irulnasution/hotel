@@ -1,4 +1,4 @@
-<?php $page='history' ?>
+<?php $page='History' ?>
 <?php include 'inc/header.php' ?>
 <?php include 'inc/sidebar.php' ?>
     

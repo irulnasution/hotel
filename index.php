@@ -1,57 +1,6 @@
 <?php include 'inc/header.php' ?>
-<div class="header-area header-sticky">
-    <div class="main-header ">
-        <div class="container">
-            <div class="row align-items-center">
-                <!-- logo -->
-                <div class="col-xl-2 col-lg-2">
-                    <div class="logo">
-                        <a href="index.html"><img src="assets/img/logo/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-xl-8 col-lg-8">
-                    <!-- main-menu -->
-                    <div class="main-menu f-right d-none d-lg-block">
-                        <nav>
-                            <ul id="navigation">
-                                <li><a href="index.html">Home</a></li>
-                                <li><a href="about.html">About</a></li>
-                                <li><a href="services.html">Service</a></li>
-                                <li><a href="blog.html">Blog</a>
-                                    <ul class="submenu">
-                                        <li><a href="blog.html">Blog</a></li>
-                                        <li><a href="single-blog.html">Blog Details</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="#">Pages</a>
-                                    <ul class="submenu">
-                                        <li><a href="rooms.html">Rooms</a>
-                                        <li><a href="elements.html">Element</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-xl-2 col-lg-2">
-                    <!-- header-btn -->
-                    <div class="header-btn">
-                        <a href="#" class="btn btn1 d-none d-lg-block ">Book Online</a>
-                    </div>
-                </div>
-                <!-- Mobile Menu -->
-                <div class="col-12">
-                    <div class="mobile_menu d-block d-lg-none"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- Header End -->
-</header>
-<main>
 
+<main>
     <!-- slider Area Start-->
     <div class="slider-area ">
         <!-- Mobile Menu -->
@@ -101,9 +50,8 @@
         <div class="container">
             <div class="row ">
                 <div class="col-12">
-                    <form action="">
+                    <form action="?act=input_pesanan" method="post">
                         <div class="booking-wrap d-flex justify-content-between align-items-center">
-
                             <!-- select in date -->
                             <div class="single-select-box mb-30">
                                 <!-- select out date -->
@@ -111,7 +59,7 @@
                                     <span> Check In Date:</span>
                                 </div>
                                 <div class="boking-datepicker">
-                                    <input id="datepicker1" placeholder="10/12/2020" />
+                                    <input id="datepicker1" placeholder="10/12/2020" name="tanggal_masuk" />
                                 </div>
                             </div>
                             <!-- Single Select Box -->
@@ -121,70 +69,62 @@
                                     <span>Check OutDate:</span>
                                 </div>
                                 <div class="boking-datepicker">
-                                    <input id="datepicker2" placeholder="12/12/2020" />
+                                    <input id="datepicker2" placeholder="12/12/2020" name="tanggal_keluar"/>
                                 </div>
                             </div>
                             <!-- Single Select Box -->
                             <div class="single-select-box mb-30">
                                 <div class="boking-tittle">
-                                    <span>Adults:</span>
+                                    <span>Jenis Kamar:</span>
                                 </div>
-                                <div class="select-this">
-                                    <form action="#">
+                                <?php 
+                                    $query = mysqli_query($conn, 'select * from kamar');
+                                    $data = mysqli_fetch_array($query); 
+                                ?>
+                                <div class="select-this">                                    
                                         <div class="select-itms">
-                                            <select name="select" id="select1">
+                                            <select id="select3" name="jenis_kamar">
+                                                <?php //while($data){ ?>
                                                 <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
+                                                <?php //} ?>
+                                                
                                             </select>
-                                        </div>
-                                    </form>
+                                        </div>                                    
                                 </div>
-                            </div>
-                            <!-- Single Select Box -->
-                            <div class="single-select-box mb-30">
-                                <div class="boking-tittle">
-                                    <span>Children:</span>
-                                </div>
-                                <div class="select-this">
-                                    <form action="#">
-                                        <div class="select-itms">
-                                            <select name="select" id="select2">
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
+                            </div>                            
                             <!-- Single Select Box -->
                             <div class="single-select-box mb-30">
                                 <div class="boking-tittle">
                                     <span>Rooms:</span>
                                 </div>
-                                <div class="select-this">
-                                    <form action="#">
+                                <div class="select-this">                                    
                                         <div class="select-itms">
-                                            <select name="select" id="select3">
-                                                <option value="">1</option>
-                                                <option value="">2</option>
-                                                <option value="">3</option>
-                                                <option value="">4</option>
+                                            <select id="select3" name="jumlah_kamar">
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
                                             </select>
-                                        </div>
-                                    </form>
+                                        </div>                                    
                                 </div>
                             </div>
                             <!-- Single Select Box -->
                             <div class="single-select-box pt-45 mb-30">
-                                <a href="#" class="btn select-btn">Book Now</a>
+                                <input type="submit" class="btn select-btn" value="Book Now">
                             </div>
 
                         </div>
                     </form>
+                    <?php
+                    if (isset($_GET['act']) and $_GET['act'] == 'input_pesanan') {
+                        $input = mysqli_query($conn, "INSERT INTO pesanan (tanggal_masuk, tanggal_keluar,
+                        jumlah_kamar) VALUES ('$_POST[tanggal_masuk]', '$_POST[tanggal_keluar]', '$_POST[jumlah_kamar]')") or die(mysqli_error($conn));
+                        
+                        if ($input) {
+                            echo "Data Berhasil Disimpan";
+                        }
+                    }                         
+                    ?>
                 </div>
             </div>
         </div>

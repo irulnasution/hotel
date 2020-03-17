@@ -1,4 +1,4 @@
-<?php $page='member' ?>
+<?php $page='Member' ?>
 <?php include 'inc/header.php' ?>
 <?php include 'inc/sidebar.php' ?>
 <?php include 'inc/koneksi.php' ?>

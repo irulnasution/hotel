@@ -8,25 +8,25 @@
           
           
           <li class="mt">
-            <a class="<?php if($page=='member') echo 'active'; ?>" href="member.php">
+            <a class="<?php if($page=='Member') echo 'active'; ?>" href="member.php">
                 <i class="fa fa-certificate"></i>
                 <span>Member</span>
             </a>
           </li>
           <li class="mt">
-            <a class="<?php if($page=='kamar') echo 'active'; ?>" href="kamar.php">
+            <a class="<?php if($page=='Kamar') echo 'active'; ?>" href="kamar.php">
                 <i class="fa fa-certificate"></i>
                 <span>Kamar</span>
             </a>
           </li>
           <li class="mt">
-            <a class="<?php if($page=='pesanan') echo 'active'; ?>" href="pesanan.php">
+            <a class="<?php if($page=='Pesanan') echo 'active'; ?>" href="pesanan.php">
                 <i class="fa fa-certificate"></i>
                 <span>Pesanan</span>
             </a>
           </li>
           <li class="mt">
-            <a class="<?php if($page=='history') echo 'active'; ?>" href="history.php">
+            <a class="<?php if($page=='History') echo 'active'; ?>" href="history.php">
                 <i class="fa fa-certificate"></i>
                 <span>History</span>
             </a>
