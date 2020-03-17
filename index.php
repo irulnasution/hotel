@@ -78,15 +78,15 @@
                                     <span>Jenis Kamar:</span>
                                 </div>
                                 <?php 
-                                    $query = mysqli_query($conn, 'select * from kamar');
-                                    $data = mysqli_fetch_array($query); 
+                                    
+                                    $data_kamar = mysqli_query($conn, "select * from kamar");
                                 ?>
                                 <div class="select-this">                                    
                                         <div class="select-itms">
                                             <select id="select3" name="jenis_kamar">
-                                                <?php //while($data){ ?>
-                                                <option value="">1</option>
-                                                <?php //} ?>
+                                                <?php while ($data = mysqli_fetch_array($data_kamar)) { ?>
+                                                <option value="<?= $data['id_kamar']?>"><?= $data['nama_kamar'] ?></option>
+                                                <?php } ?>
                                                 
                                             </select>
                                         </div>                                    
