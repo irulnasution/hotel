@@ -69,7 +69,7 @@
                                     <span>Check OutDate:</span>
                                 </div>
                                 <div class="boking-datepicker">
-                                    <input id="datepicker2" placeholder="12/12/2020" name="tanggal_keluar"/>
+                                    <input id="datepicker2" placeholder="12/12/2020" name="tanggal_keluar" />
                                 </div>
                             </div>
                             <!-- Single Select Box -->
@@ -77,35 +77,35 @@
                                 <div class="boking-tittle">
                                     <span>Jenis Kamar:</span>
                                 </div>
-                                <?php 
-                                    
-                                    $data_kamar = mysqli_query($conn, "select * from kamar");
+                                <?php
+
+                                $data_kamar = mysqli_query($conn, "select * from kamar");
                                 ?>
-                                <div class="select-this">                                    
-                                        <div class="select-itms">
-                                            <select id="select3" name="jenis_kamar">
-                                                <?php while ($data = mysqli_fetch_array($data_kamar)) { ?>
-                                                <option value="<?= $data['id_kamar']?>"><?= $data['nama_kamar'] ?></option>
-                                                <?php } ?>
-                                                
-                                            </select>
-                                        </div>                                    
+                                <div class="select-this">
+                                    <div class="select-itms">
+                                        <select id="select3" name="jenis_kamar">
+                                            <?php while ($data = mysqli_fetch_array($data_kamar)) { ?>
+                                                <option value="<?= $data['id_kamar'] ?>"><?= $data['nama_kamar'] ?></option>
+                                            <?php } ?>
+
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>                            
+                            </div>
                             <!-- Single Select Box -->
                             <div class="single-select-box mb-30">
                                 <div class="boking-tittle">
                                     <span>Rooms:</span>
                                 </div>
-                                <div class="select-this">                                    
-                                        <div class="select-itms">
-                                            <select id="select3" name="jumlah_kamar">
-                                                <option value="1">1</option>
-                                                <option value="2">2</option>
-                                                <option value="3">3</option>
-                                                <option value="4">4</option>
-                                            </select>
-                                        </div>                                    
+                                <div class="select-this">
+                                    <div class="select-itms">
+                                        <select id="select3" name="jumlah_kamar">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                             <!-- Single Select Box -->
@@ -119,11 +119,11 @@
                     if (isset($_GET['act']) and $_GET['act'] == 'input_pesanan') {
                         $input = mysqli_query($conn, "INSERT INTO pesanan (tanggal_masuk, tanggal_keluar,
                         jumlah_kamar) VALUES ('$_POST[tanggal_masuk]', '$_POST[tanggal_keluar]', '$_POST[jumlah_kamar]')") or die(mysqli_error($conn));
-                        
+
                         if ($input) {
                             echo "Data Berhasil Disimpan";
                         }
-                    }                         
+                    }
                     ?>
                 </div>
             </div>
@@ -146,98 +146,32 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"><img src="assets/img/rooms/room1.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
+               <?php
+                $data_kamar = mysqli_query($conn, "SELECT * FROM kamar ORDER BY id_kamar");
+                while ($data = mysqli_fetch_array($data_kamar)) { ?>
+                    <div class="col-xl-4 col-lg-6 col-md-6">
+                        <!-- Single Room -->
+                        <div class="single-room mb-50">
+                            <div class="room-img">
+                                <a href="rooms.html"><img src="admin/uploads/product/<?= $data['gambar'] ?>" alt=""></a>
+
+                            </div>
+                            <div class="room-caption">
+                                <h3><a href="rooms.html"><?= $data['deskripsi'].' ('.$data['nama_kamar'].')'; ?></a></h3>
+                                <div class="per-night">
+                                    <span><u>$</u><?= $data['harga'] ?> <span>/ par night</span></span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"><img src="assets/img/rooms/room2.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"> <img src="assets/img/rooms/room3.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"><img src="assets/img/rooms/room4.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"><img src="assets/img/rooms/room5.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-6 col-md-6">
-                    <!-- Single Room -->
-                    <div class="single-room mb-50">
-                        <div class="room-img">
-                            <a href="rooms.html"> <img src="assets/img/rooms/room6.jpg" alt=""></a>
-                        </div>
-                        <div class="room-caption">
-                            <h3><a href="rooms.html">Classic Double Bed</a></h3>
-                            <div class="per-night">
-                                <span><u>$</u>150 <span>/ par night</span></span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php } ?>
             </div>
             <div class="row justify-content-center">
                 <div class="room-btn pt-70">
                     <a href="#" class="btn view-btn1">View more <i class="ti-angle-right"></i> </a>
                 </div>
             </div>
-        </div>
-
+        </div>                
     </section>
     <!-- Room End -->
 

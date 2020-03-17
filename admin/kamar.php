@@ -15,6 +15,7 @@
                     <th scope="col">Tipe Kamar</th>
                     <th scope="col">Deskripsi</th>
                     <th scope="col">Harga</th>
+                    <th scope="col">Gambar</th>
                     <th scope="col">Stok</th>
                     <th scope="col">Aksi</th>
                 </tr>
@@ -30,6 +31,7 @@
                             <td><?php echo $data['tipe_kamar'] ?></td>
                             <td><?php echo $data['deskripsi'] ?></td>
                             <td><?php echo $data['harga'] ?></td>
+                            <td><?php echo $data['gambar'] ?></td>
                             <td><?php echo $data['stok'] ?></td>
                             <td>
                                 <a href="?act=edit&id=<?php echo $data['id_kamar'] ?>">Edit</a> |
@@ -44,7 +46,7 @@
             if (isset($_GET['act']) and $_GET['act'] == 'tambah') { ?>
                 <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Tambah Kamar</h4>
-                    <form class="form-horizontal style-form" action="?act=proses_tambah" method="post">
+                    <form class="form-horizontal style-form" action="?act=proses_tambah" method="post" enctype="multipart/form-data">
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Nama Kamar</label>
                             <div class="col-sm-10">
@@ -70,6 +72,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Gambar</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="gambar">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Stok</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="Stok Kamar" name="stok">
@@ -82,7 +90,7 @@
                 $isi = mysqli_fetch_array(mysqli_query($conn, "select * from kamar where id_kamar='$_GET[id]'")); { ?>
                   <div class="form-panel">
                     <h4 class="mb"><i class="fa fa-angle-right"></i> Edit Data Kamar</h4>
-                    <form class="form-horizontal style-form" action="?act=proses_edit" method="post">
+                    <form class="form-horizontal style-form" action="?act=proses_edit" method="post" enctype='multipart/form-data'>
                         <input type="hidden" name="id_kamar" value="<?php echo $isi['id_kamar'] ?>">
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Nama Kamar</label>
@@ -109,6 +117,13 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Gambar</label>
+                            <div class="col-sm-10">
+                                <input type="file" class="form-control" name="gambar">
+                                <img src="uploads/product/<?=$isi['gambar']?>" width="100px" height="100px" alt="">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Stok</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" placeholder="Stok Kamar" name="stok" value="<?php echo $isi['stok']; ?>">
@@ -119,10 +134,28 @@
                 </div>                  
         <?php } 
         } elseif (isset($_GET['act']) and $_GET['act'] == 'proses_edit') {
-            $update = mysqli_query($conn, "update kamar set nama_kamar='$_POST[nama_kamar]', tipe_kamar='$_POST[tipe_kamar]',
-            deskripsi='$_POST[deskripsi]', stok='$_POST[stok]' where id_kamar='$_POST[id_kamar]'");
+            // $update = mysqli_query($conn, "update kamar set nama_kamar='$_POST[nama_kamar]', tipe_kamar='$_POST[tipe_kamar]',
+            // deskripsi='$_POST[deskripsi]', stok='$_POST[stok]' where id_kamar='$_POST[id_kamar]'");
+            if ($_FILES['gambar']['error'] != 0) {
+                $edit = mysqli_query($conn, "UPDATE kamar SET nama_kamar='$_POST[nama_kamar]', tipe_kamar='$_POST[tipe_kamar]',
+                deskripsi='$_POST[deskripsi]', harga=$_POST[harga], stok=$_POST[stok] where id_kamar='$_POST[id_kamar]'") or die(mysqli_error($conn));
+                } else {
+                    $tmp_file = $_FILES['gambar']['tmp_name'];
+                    $filename = $_FILES['gambar']['name'];
+                    $filetype = $_FILES['gambar']['type'];
+                    $filesize = $_FILES['gambar']['size'];
+        
+                    $destination = 'uploads/product/' . $filename;
+        
+                    if (move_uploaded_file($tmp_file, $destination)) {
+                        $gambar = $filename;
+                    }
+        
+                    $edit = mysqli_query($conn, "UPDATE kamar SET nama_kamar='$_POST[nama_kamar]', tipe_kamar='$_POST[tipe_kamar]',
+                    deskripsi='$_POST[deskripsi]', harga=$_POST[harga], gambar='$gambar', stok=$_POST[stok] 
+                    where id_kamar='$_POST[id_kamar]'") or die(mysqli_error($conn)); }            
 
-            if ($update) {
+            if ($edit) {
                 echo "<script> 
                         window.location.href='kamar.php';
                       </script>";
@@ -139,16 +172,33 @@
                 echo "Data gagal dihapus";
             }
         } elseif (isset($_GET['act']) and $_GET['act'] == 'proses_tambah') {
+            if ($_FILES['gambar']['error'] != 0) {
             $insert = mysqli_query($conn, "INSERT INTO kamar (nama_kamar, tipe_kamar, deskripsi,
             harga, gambar, stok) VALUEs ('$_POST[nama_kamar]', '$_POST[tipe_kamar]', '$_POST[deskripsi]',
-            '$_POST[harga]', 'default.jpg', '$_POST[stok]')") or die(mysqli_error($conn));
-            if ($insert) {
-                echo "<script>
-                    window.location.href='kamar.php';
-                </script>";
+            '$_POST[harga]', '$_POST[stok]')") or die(mysqli_error($conn));
             } else {
-                echo "Data gagal ditambah";
-            }
+                $tmp_file = $_FILES['gambar']['tmp_name'];
+                $filename = $_FILES['gambar']['name'];
+                $filetype = $_FILES['gambar']['type'];
+                $filesize = $_FILES['gambar']['size'];
+    
+                $destination = 'uploads/product/' . $filename;
+    
+                if (move_uploaded_file($tmp_file, $destination)) {
+                    $gambar = $filename;
+                }
+    
+                $tambah = mysqli_query($conn, "INSERT INTO kamar (nama_kamar, tipe_kamar, deskripsi,
+                harga, gambar, stok) VALUEs ('$_POST[nama_kamar]', '$_POST[tipe_kamar]', '$_POST[deskripsi]', '$_POST[harga]', '$gambar', '$_POST[stok]')") or die(mysqli_error($conn)); }
+    
+    if ($tambah) {
+        echo "<script>
+            window.location.href='kamar.php';
+        </script>";
+    } else {
+        echo "Data gagal dihapus";
+    }
+    
         } ?>
       </section>
     </section>
