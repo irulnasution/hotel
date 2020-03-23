@@ -20,6 +20,12 @@
             </a>
           </li>
           <li class="mt">
+            <a class="<?php if($page=='Blog') echo 'active'; ?>" href="blog.php">
+                <i class="fa fa-certificate"></i>
+                <span>Blog</span>
+            </a>
+          </li>
+          <li class="mt">
             <a class="<?php if($page=='Pesanan') echo 'active'; ?>" href="pesanan.php">
                 <i class="fa fa-certificate"></i>
                 <span>Pesanan</span>

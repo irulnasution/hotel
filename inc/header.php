@@ -53,21 +53,18 @@
                                 <nav>
                                     <ul id="navigation">
                                         <li><a href="index.php">Home</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="services.html">Service</a></li>
-                                        <li><a href="blog.html">Blog</a>
+                                        <li><a href="about.php">About</a></li>
+                                        <li><a href="services.php">Service</a></li>
+                                        <li><a href="blog.php">Blog</a>
                                             <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="single-blog.html">Blog Details</a></li>
+                                                <li><a href="blog.php">Blog</a></li>
+                                                <li><a href="single-blog.php">Blog Details</a></li>
                                             </ul>
                                         </li>
-                                        <li><a href="#">Pages</a>
-                                            <ul class="submenu">
-                                                <li><a href="rooms.html">Rooms</a>
-                                                <li><a href="elements.html">Element</a></li>
-                                            </ul>
+                                        <li><a href="rooms.php">Rooms</a>
+                                            
                                         </li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="contact.php">Contact</a></li>
                                         <?php 
                                             if (isset($_SESSION['email']) and $_SESSION['password']) { ?>
                                                 <li><a href="account.php"><i class="fas fa-user"></i> Profil</a>

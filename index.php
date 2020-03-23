@@ -117,13 +117,25 @@
                     </form>
                     <?php
                     if (isset($_GET['act']) and $_GET['act'] == 'input_pesanan') {
-                        $input = mysqli_query($conn, "INSERT INTO pesanan (tanggal_masuk, tanggal_keluar,
-                        jumlah_kamar) VALUES ('$_POST[tanggal_masuk]', '$_POST[tanggal_keluar]', '$_POST[jumlah_kamar]')") or die(mysqli_error($conn));
+
+                        $jumlah_kamar = $_POST['jumlah_kamar'];
+
+                        $tgl_msk = $_POST['tanggal_masuk'];
+                        $tgl_masuk = explode("/", $tgl_msk);
+                        // print_r($tgl_masuk);
+                        $tanggal_masuk = $tgl_masuk[2] . '-' . $tgl_masuk[1] . '-' . $tgl_masuk[0];
+
+                        $tgl_klr = $_POST['tanggal_keluar'];
+                        $tgl_keluar = explode("/", $tgl_klr);
+                        $tanggal_keluar = $tgl_keluar[2] . '-' . $tgl_keluar[1] . '-' . $tgl_keluar[0];
+
+                        $input = mysqli_query($conn, "INSERT INTO pesanan (id_member, id_kamar, tanggal_masuk, tanggal_keluar,
+                                    jumlah_kamar) VALUES ('$_SESSION[id_member]', $_POST[jenis_kamar], '$tanggal_masuk', '$tanggal_keluar', '$jumlah_kamar')") or die(mysqli_error($conn));
 
                         if ($input) {
                             echo "Data Berhasil Disimpan";
                         }
-                    }
+                    } 
                     ?>
                 </div>
             </div>
@@ -146,7 +158,7 @@
                 </div>
             </div>
             <div class="row">
-               <?php
+                <?php
                 $data_kamar = mysqli_query($conn, "SELECT * FROM kamar ORDER BY id_kamar");
                 while ($data = mysqli_fetch_array($data_kamar)) { ?>
                     <div class="col-xl-4 col-lg-6 col-md-6">
@@ -157,7 +169,7 @@
 
                             </div>
                             <div class="room-caption">
-                                <h3><a href="rooms.html"><?= $data['deskripsi'].' ('.$data['nama_kamar'].')'; ?></a></h3>
+                                <h3><a href="rooms.html"><?= $data['nama_kamar'] . ' (' . $data['deskripsi'] . ')'; ?></a></h3>
                                 <div class="per-night">
                                     <span><u>$</u><?= $data['harga'] ?> <span>/ par night</span></span>
                                 </div>
@@ -171,7 +183,7 @@
                     <a href="#" class="btn view-btn1">View more <i class="ti-angle-right"></i> </a>
                 </div>
             </div>
-        </div>                
+        </div>
     </section>
     <!-- Room End -->
 
