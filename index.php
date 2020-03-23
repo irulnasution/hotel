@@ -123,11 +123,11 @@
                         $tgl_msk = $_POST['tanggal_masuk'];
                         $tgl_masuk = explode("/", $tgl_msk);
                         // print_r($tgl_masuk);
-                        $tanggal_masuk = $tgl_masuk[2] . '-' . $tgl_masuk[1] . '-' . $tgl_masuk[0];
+                        $tanggal_masuk = $tgl_masuk[2] . '-' . $tgl_masuk[0] . '-' . $tgl_masuk[1];
 
                         $tgl_klr = $_POST['tanggal_keluar'];
                         $tgl_keluar = explode("/", $tgl_klr);
-                        $tanggal_keluar = $tgl_keluar[2] . '-' . $tgl_keluar[1] . '-' . $tgl_keluar[0];
+                        $tanggal_keluar = $tgl_keluar[2] . '-' . $tgl_keluar[0] . '-' . $tgl_keluar[1];
 
                         $input = mysqli_query($conn, "INSERT INTO pesanan (id_member, id_kamar, tanggal_masuk, tanggal_keluar,
                                     jumlah_kamar) VALUES ('$_SESSION[id_member]', $_POST[jenis_kamar], '$tanggal_masuk', '$tanggal_keluar', '$jumlah_kamar')") or die(mysqli_error($conn));
