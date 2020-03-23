@@ -40,7 +40,7 @@
                             </div>
 
                             <div class="blog_details">
-                                <a class="d-inline-block" href="single-blog.php">
+                                <a class="d-inline-block" href="single-blog.php?id_blog=<?= $data['id_blog'] ?>">
                                     <h2><?php echo $data['judul'] ?></h2>
                                 </a>
                                 <p><?= $data['deskripsi'] ?></p>

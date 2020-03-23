@@ -43,10 +43,10 @@
                             $email = $_POST["email"];
                             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                                 echo "<script>
-                                window.alert(Format Email Salah);
+                                alert('Format Email Salah');
+                                window.location.href='sign_up.php';
                                 </script>";
-                            }
-                            if ($_POST['password'] == $_POST['konfirmasi_password']) {
+                            } else if ($_POST['password'] == $_POST['konfirmasi_password']) {
                                 $input = mysqli_query($conn, "INSERT INTO member (nama_depan, nama_belakang,
                                 alamat, email, password, telepon) VALUES ('$_POST[nama_depan]', '$_POST[nama_belakang]',
                                 '$_POST[alamat]', '$email', '$_POST[password]', '$_POST[telepon]')") or die(mysqli_error($conn));

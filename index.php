@@ -85,8 +85,15 @@
                                     <div class="select-itms">
                                         <select id="select3" name="jenis_kamar">
                                             <?php while ($data = mysqli_fetch_array($data_kamar)) { ?>
+                                                <?php 
+                                                    $id_kamar=$data['id_kamar'];
+                                                    $cek = mysqli_query($conn,"SELECT id_kamar from pesanan WHERE id_kamar=$id_kamar");
+                                                    $banyak = mysqli_num_rows($cek);
+                                                    if($banyak==0){    
+                                                ?>
                                                 <option value="<?= $data['id_kamar'] ?>"><?= $data['nama_kamar'] ?></option>
-                                            <?php } ?>
+                                            <?php }
+                                                } ?>
 
                                         </select>
                                     </div>
@@ -133,7 +140,10 @@
                                     jumlah_kamar) VALUES ('$_SESSION[id_member]', $_POST[jenis_kamar], '$tanggal_masuk', '$tanggal_keluar', '$jumlah_kamar')") or die(mysqli_error($conn));
 
                         if ($input) {
-                            echo "Data Berhasil Disimpan";
+                            echo "<script>
+                            alert('Pesanan berhasil diinput');
+                            window.location.href='index.php';
+                            </script>";
                         }
                     } 
                     ?>
