@@ -96,10 +96,10 @@
                 echo "Data gagal diedit!";
             } 
       } elseif (isset($_GET['act']) and $_GET['act'] == 'hapus') {
-          $hapus = mysqli_query($conn, "delete from member where id_member='$_GET[id]'");
+          $hapus = mysqli_query($conn, "delete from pesanan where id_pesanan='$_GET[id]'");
           if ($hapus) {
               echo "<script>
-                        window.location.href='member.php';
+                        window.location.href='pesanan.php';
                     </script>";
           }
       }  elseif (isset($_GET['act']) and $_GET['act'] == 'tambah') { ?>

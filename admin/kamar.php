@@ -40,8 +40,8 @@
                         </tr>
                 <?php } ?>                
             </tbody>
-        </table>        
-
+        </table>      
+            <a href="print.php">Print</a>
         <?php
             if (isset($_GET['act']) and $_GET['act'] == 'tambah') { ?>
                 <div class="form-panel">
